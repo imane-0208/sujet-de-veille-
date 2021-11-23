@@ -1,0 +1,43 @@
+h1#headerNames {
+  margin-top: 10%;
+  color: #030b1b;
+  font-family: Georgia, serif;
+  font-size: 100px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.button {
+  width: 200px;
+  margin: auto;
+  padding: 20px;
+  background: -webkit-gradient(linear, left top, right top, from(#44ff48), color-stop(50%, #64e8ff), to(#00c0ff));
+  background: linear-gradient(90deg, #44ff48 0%, #64e8ff 50%, #00c0ff 100%);
+  border-radius: 5px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  cursor: pointer;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.button:hover {
+  background: -webkit-gradient(linear, left top, right top, from(#00c0ff), color-stop(50%, #64e8ff), to(#44ff48));
+  background: linear-gradient(90deg, #00c0ff 0%, #64e8ff 50%, #44ff48 100%);
+  border: 3px solid #fff;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 50px;
+  }
+}
+/*# sourceMappingURL=style.css.map */

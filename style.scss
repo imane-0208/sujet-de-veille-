@@ -1,0 +1,42 @@
+body {
+	// background: #333 !important;
+}
+
+h1#headerNames {
+	margin-top: 10%;
+	color: #030b1b;
+	font-family: Georgia, serif;
+	font-size: 100px;
+    font-weight: 200;
+	text-align: center;
+}
+
+.button {
+	width: 200px;
+	margin: auto;
+	padding: 20px;
+	background: linear-gradient(90deg, rgba(68,255,72,1) 0%, rgba(100,232,255,1) 50%, rgba(0,192,255,1) 100%);
+	// border: 2px solid #fff;
+	border-radius: 5px;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	display: block;
+	cursor: pointer;
+	transition: .5s;
+}
+.button:hover {
+	background: linear-gradient(90deg, rgba(0,192,255,1) 0%, rgba(100,232,255,1) 50%, rgba(68,255,72,1) 100%);
+	border: 3px solid #fff;
+	transition: .5s;
+}
+
+@media only screen and (max-width: 600px) {
+	h1 {
+		font-size: 50px;
+	}
+}
