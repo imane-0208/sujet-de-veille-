@@ -1,152 +1,96 @@
-
-
 // Default variables
-const startButton = document.getElementById('startButton');
-const headerOne = document.getElementById('headerNames');
-const tbody = document.getElementById('tbody');
+const startButton = document.getElementById("startButton");
+const headerOne = document.getElementById("headerNames");
+const tbody = document.getElementById("tbody");
 
 // Add list of names
-var namesList = [];  
-var resultList = [];  
-// var headerNames;
+var namesList = [];
+var resultList = [];
 
-document.getElementById('stringArray').addEventListener('change',function(){
-	
-	var nameList = $("#stringArray").val();
-  
-	$.each(nameList.split(/\n/), function (i, name) {
-		
+var iCount = 1;
 
-		// check if string is empty
-		if(name != ""){
-			// namesList.push(name);
-			namesList.push({'id': i+1 , 'name': name});
-		}
-		document.getElementById('namelist').innerHTML = nameList;
+var u;
 
+document.getElementById("stringArray").addEventListener("change", function () {
+  var nameList = $("#stringArray").val();
 
-		
-	});
-
-
-	
-});
-// for(let i=0; i<nameList.length; i++){
-	
-// 	document.getElementById('namelist').innerHTML = nameList;
-// }
-
-
-
-
-
-// document.getElementById('stringArray').addEventListener('keyup' , function(){
-// 	for(let i=0; i<nameList.length; i++){
-		
-// 				document.getElementById('namelist').innerHTML = nameList;
-// 			}
-// });
-
-
-
-// function listaffich(){
-// 	for(let i=0; i<nameList.length; i++){
-		
-// 		document.getElementById('namelist').innerHTML = nameList;
-// 	}
-// }
-
- 
-
-// Start or stop the name shuffle on button click
-startButton.addEventListener('click', function() {
-	// stopButton.style.display = "block";
-	if(namesList.length == 0){
-		this.style.display = "none";
-	}
-
-	// intervalHandle = setInterval(function () {
-		var u = rand();
-		headerOne.textContent = namesList[u].id + namesList[u].name;
-		var subjectDate = date();
-		console.log(subjectDate);
-	// }, 500);
-
-    // setTimeout(clearInterval, 2000, (intervalHandle));
-	
-	// for(i=0; i<namesList.length; i++){
-
-
-
-
-	
-		resultList.push({'id': namesList[u].id , 'name': namesList[u].name, 'sujet': 'hhhh', 'date': subjectDate});
-		// }
-		namesList.splice(u, 1);
-
-	console.log(namesList);
-	console.log(namesList.length);
-	console.log(resultList);
-
-	
-
-	if(resultList.length == 5){
-		resultList.forEach(element => {
-			tbody.innerHTML += `
-				<tr>
-					<td class="align-middle text-center">
-						<h6 class="mb-0 text-xs">${element.id}</h6>
-					</td>
-		
-					<td class="align-middle text-center text-sm">
-						<p class="text-xs text-secondary mb-0">${element.name}</p>
-					</td>
-		
-					<td class="align-middle text-center">
-						<p class="text-xs text-secondary mb-0">${element.sujet}</p>
-					</td>
-		
-					<td class="align-middle text-center">
-						<p class="text-xs text-secondary mb-0">${element.date}</p>
-					</td>
-		
-				</tr>
-			`
-			
-		});
-	}
-
-});
-
-function rand(){
-
-	return Math.floor(Math.random() * namesList.length);
-	
-}
-
-function date(){
-	var date=document.getElementById("date").value;
-	// console.log(date);
-
-   var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-   var dayName;
-   result=new Date(date);
-
-    for (var i = 0; i < resultList.length; i++) {
-
-          result.setDate(result.getDate() + i);
-
-         dayName = days[result.getDay()];
-         console.log(dayName);
-
-         if(dayName=="Saturday"){
-            result.setDate(result.getDate() + 2);
-         }
-         else if(dayName=="Sunday"){
-            result.setDate(result.getDate() + 1);
-         }
-		//  resultList[i].push({'date': result.getDate()});
-		
+  $.each(nameList.split(/\n/), function (i, name) {
+    if (name != "") {
+      namesList.push({ id: i + 1, name: name });
+      console.log(nameList);
     }
-	return result.getDate();
+    document.getElementById("namelist").innerHTML = nameList 
+	;
+  });
+});
+
+document.getElementById("sujetField").style.display = "none";
+
+startButton.addEventListener("click", function () {
+  if (namesList.length == 1) {
+    this.style.display = "none";
+    document.getElementById("sujetField").style.display = "none";
+  }
+
+  document.getElementById("sujetField").style.display = "block";
+ u = rand();
+  headerOne.textContent = namesList[u].name;
+});
+
+document.getElementById("addSujet").addEventListener("click", function () {
+  var dateI = document.getElementById("date").value;
+
+  var sujet = document.getElementById("sujet");
+//   console.log(namesList);
+  let obj = {
+    id: namesList[u].id,
+    name: namesList[u].name,
+    sujet: sujet.value,
+    date: date(dateI, iCount++),
+  };
+
+  resultList.push(obj);
+  namesList.splice(u, 1);
+  // console.table(namesList);
+  // console.table(resultList);
+
+  sujet.value = "";
+
+  tbody.innerHTML = "";
+  resultList.forEach((element) => {
+    tbody.innerHTML += `
+					<tr>
+						<td class="align-middle text-center">
+							<h6 class="mb-0 text-xs">${element.id}</h6>
+						</td>
+			
+						<td class="align-middle text-center text-sm">
+							<p class="text-xs text-secondary mb-0">${element.name}</p>
+						</td>
+			
+						<td class="align-middle text-center">
+							<p class="text-xs text-secondary mb-0">${element.sujet}</p>
+						</td>
+			
+						<td class="align-middle text-center">
+							<p class="text-xs text-secondary mb-0">${element.date}</p>
+						</td>
+			
+					</tr>
+				`;
+  });
+});
+
+function rand() {
+  return Math.floor(Math.random() * namesList.length);
 }
+
+const date = (date, days) => {
+  var d = moment(new Date(date)).add(Math.floor(days / 5) * 7, "d");
+  var remaining = days % 5;
+  while (remaining) {
+    d.add(1, "d");
+    if (d.day() !== 0 && d.day() !== 6) remaining--;
+  }
+  return d.format('YYYY-MM-DD');
+};
